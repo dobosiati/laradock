@@ -1,0 +1,6 @@
+*.conf
+!default.conf
+!greeta.conf
+!q.conf
+!screensavers.conf
+!taskey.conf
