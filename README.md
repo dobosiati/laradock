@@ -42,9 +42,9 @@ edit as needed.
 
 Ensure to add the website hosts to your /etc/hosts file
 
-127.0.0.1 site1.test
+127.0.0.1 q.test
 
-127.0.0.1 site2.test
+127.0.0.1 screensavers.test
 
 Also add these for convenience
 
@@ -78,9 +78,6 @@ depends_on:
 links:
   - nginx:q.test
   - nginx:screensavers.test
-  - nginx:greeta.test
-  - nginx:taskey.test
-  - nginx:surprise.test
 ```
 
 Take note each time you add a new site you will need to add it to the links reference [https://github.com/laradock/laradock/issues/907](https://github.com/laradock/laradock/issues/907)
@@ -91,15 +88,17 @@ I have created some aliases for my system to make starting, stopping and ssh a l
 
 `alias lara='cd ~/Code/laradock; docker-compose up -d nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
 
-`alias lara-bash='cd ~/Code/laradock; docker-compose exec --user=laradock workspace bash'`
+`alias larabash='cd ~/Code/laradock; docker-compose exec --user=laradock workspace bash'`
 
-`alias lara-restart='cd ~/Code/laradock; docker-compose restart nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
+`alias lararestart='cd ~/Code/laradock; docker-compose restart nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
 
-`alias lara-stop='cd ~/Code/laradock; docker-compose stop'`
+`alias laraehrestart='cd ~/Work/code/laradock; docker-compose restart elasticsearch laravel-horizon'`
 
-`alias lara-redis='cd ~/Code/laradock; docker-compose exec redis bash'`
+`alias larastop='cd ~/Code/laradock; docker-compose stop'`
 
-`alias lara-mysql='cd ~/Code/laradock; docker-compose exec mysql bash'`
+`alias lararedis='cd ~/Code/laradock; docker-compose exec redis bash'`
+
+`alias laramysql='cd ~/Code/laradock; docker-compose exec mysql bash'`
 
 ## OTHER
 

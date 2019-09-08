@@ -761,9 +761,6 @@ services:
       links:
         - nginx:q.test
         - nginx:screensavers.test
-        - nginx:greeta.test
-        - nginx:taskey.test
-        - nginx:surprise.test
 
 ### Varnish ##########################################
     proxy:
