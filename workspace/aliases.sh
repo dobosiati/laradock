@@ -154,3 +154,5 @@ function fs() {
 # Custom Aliases
 alias lang='artisan vue-i18n:generate'
 alias wipelogs='truncate -s 0 storage/logs/*.log'
+alias qmigrate='cd /var/www/q && php artisan migrate:crowdco --fresh'
+alias q='cd /var/www/q'
