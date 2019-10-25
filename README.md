@@ -32,10 +32,16 @@ If you find there are issues building the nginx container use
 
 ## Sites
 
+### NGNIX
+
 Configure sites in `./laradock/nginx/sites/`
 
 copy `laravel.conf.example` to `yoursite.conf`
 
+### Caddy
+ 
+Configure sites in `./caddy/caddy/Caddyfile`
+ 
 edit as needed.
 
 ## Hosts file
@@ -86,11 +92,19 @@ Take note each time you add a new site you will need to add it to the links refe
 
 I have created some aliases for my system to make starting, stopping and ssh a little easier.
 
+with ngnix
+`alias lara='cd ~/Code/laradock; docker-compose up -d nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
+ 
+with caddy
 `alias lara='cd ~/Code/laradock; docker-compose up -d nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
 
 `alias larabash='cd ~/Code/laradock; docker-compose exec --user=laradock workspace bash'`
 
-`alias lararestart='cd ~/Code/laradock; docker-compose restart nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
+with ngnix
+ `alias lara-restart='cd ~/Code/laradock; docker-compose restart nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
+ 
+with caddy
+`alias lara-restart='cd ~/Code/laradock; docker-compose restart caddy mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
 
 `alias laraehrestart='cd ~/Work/code/laradock; docker-compose restart elasticsearch laravel-horizon'`
 
