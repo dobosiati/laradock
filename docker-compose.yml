@@ -757,10 +757,11 @@ services:
       networks:
         - frontend
       depends_on:
-        - nginx
+#        - nginx
+        - caddy
       links:
-        - nginx:q.test
-        - nginx:screensavers.test
+        - caddy:q.test
+        - caddy:screensavers.test
 
 ### Varnish ##########################################
     proxy:
