@@ -60,6 +60,10 @@ To install the latest version of docker:
 make sure its the 18.x version. I needed to do 
  
 `sudo apt-get install docker-ce=18.06.3~ce~3-0~ubuntu`
+
+release notes
+ 
+[https://docs.docker.com/engine/release-notes/#version-1903](https://docs.docker.com/engine/release-notes/#version-1903)
  
 ##### Step 7 start at boot
  
