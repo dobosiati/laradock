@@ -12,7 +12,7 @@ Follow these steps to get this up and running. This is configured to run multipl
 
 ### Ubuntu
  
-Install docker [https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04](https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04)
+Install docker [https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
  
 ##### Step 1 Update Local Database
  
@@ -40,9 +40,7 @@ To ensure that the software you’re installing is authentic enter:
  
 To install the Docker repository, enter the command:
  
-`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"`
- 
-The command *$(lsb_release –cs)* scans and returns the codename of your Ubuntu installation – in this case, Bionic. Also, the final word of the command – stable– is the type of Docker release.
+`sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"`
  
 example installation of the docker repository in terminal 
 A stable release is tested and confirmed to work, but updates are released less frequently. You may substitute edge if you’d like more frequent updates, at the cost of potential instability. There are other repositories, but they are riskier – more info can be found on the [https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository](Docker web page).
@@ -55,7 +53,7 @@ Update the repositories you just added:
 ##### Step 6: Install Latest Version of Docker
 To install the latest version of docker:
  
-`sudo apt-get install docker-ce`
+`sudo apt-get install docker-ce docker-ce-cli containerd.io`
  
 make sure its the 18.x version. I needed to do 
  
