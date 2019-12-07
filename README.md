@@ -4,7 +4,15 @@ This repository is a customised fork of [https://github.com/laradock/laradock](h
 
 Most of the notes here have been worked out from the laradocs documentation. [https://laradock.io/getting-started/#requirements](https://laradock.io/getting-started/#requirements)
 
-get steps to track remote repo here.
+[https://dev.to/jeremy/how-to-sync-your-fork-with-the-parent-repository-3ok1](https://dev.to/jeremy/how-to-sync-your-fork-with-the-parent-repository-3ok1)
+ 
+Add this repo or laradock as an upstream
+ 
+`git remote add upstream https://github.com/laradock/laradock.git`
+ 
+get the upstream code.
+ 
+`git fetch upstream`
 
 ## Install / Setup
 
