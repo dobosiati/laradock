@@ -39,12 +39,12 @@ ENV PGID ${PGID}
 ARG CHANGE_SOURCE=false
 ARG UBUNTU_SOURCE
 COPY ./sources.sh /tmp/sources.sh
- 
+
 RUN if [ ${CHANGE_SOURCE} = true ]; then \
     /bin/sh -c /tmp/sources.sh && \
     rm -rf /tmp/sources.sh \
 ;fi
- 
+
 # always run apt update when start and after add new source list, then clean up at end.
 RUN set -xe; \
     apt-get update -yqq && \
@@ -921,7 +921,7 @@ RUN if [ ${INSTALL_POWERLINE} = true ]; then \
 # SUPERVISOR:
 ###########################################################################
 ARG INSTALL_SUPERVISOR=false
- 
+
 RUN if [ ${INSTALL_SUPERVISOR} = true ]; then \
     if [ ${INSTALL_PYTHON} = true ]; then \
     python -m pip install --upgrade supervisor && \
@@ -1064,11 +1064,11 @@ RUN if [ ${INSTALL_SSHPASS} = true ]; then \
 ###########################################################################
 # YAML: extension for PHP-CLI
 ###########################################################################
- 
+
 USER root
- 
+
 ARG INSTALL_YAML=false
- 
+
 RUN if [ ${INSTALL_YAML} = true ]; then \
     apt-get install libyaml-dev -y ; \
     if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
@@ -1079,7 +1079,7 @@ RUN if [ ${INSTALL_YAML} = true ]; then \
     echo "extension=yaml.so" >> /etc/php/${LARADOCK_PHP_VERSION}/mods-available/yaml.ini && \
     ln -s /etc/php/${LARADOCK_PHP_VERSION}/mods-available/yaml.ini /etc/php/${LARADOCK_PHP_VERSION}/cli/conf.d/35-yaml.ini \
 ;fi
- 
+
 ###########################################################################
 # FFMpeg:
 ###########################################################################
@@ -1095,13 +1095,13 @@ RUN if [ ${INSTALL_FFMPEG} = true ]; then \
 ###########################################################################
 # Mailparse extension:
 ###########################################################################
- 
+
 ARG INSTALL_MAILPARSE=false
- 
+
 RUN if [ ${INSTALL_MAILPARSE} = true ]; then \
     apt-get install -yqq php-mailparse \
 ;fi
- 
+
 ###########################################################################
 # GNU Parallel:
 ###########################################################################

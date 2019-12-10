@@ -4,10 +4,14 @@ This repository is a customised fork of [https://github.com/laradock/laradock](h
 
 Most of the notes here have been worked out from the laradocs documentation. [https://laradock.io/getting-started/#requirements](https://laradock.io/getting-started/#requirements)
 
+## Track changes
+
+In I will keep this up to date with the main laradock branch. However you should track your own changes on a fork of this repo.
+
 [https://dev.to/jeremy/how-to-sync-your-fork-with-the-parent-repository-3ok1](https://dev.to/jeremy/how-to-sync-your-fork-with-the-parent-repository-3ok1)
- 
+
 Add this repo or laradock as an upstream
- 
+
 `git remote add upstream https://github.com/laradock/laradock.git`
  
 get the upstream code.
@@ -19,62 +23,60 @@ get the upstream code.
 Follow these steps to get this up and running. This is configured to run multiple sites from one laradock not a single project.
 
 ### Ubuntu
- 
+
 Install docker [https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
- 
+
 ##### Step 1 Update Local Database
- 
+
 Update the local database with the command:
- 
+
 `sudo apt-get update`
- 
+
 ##### Step 2 Download Dependencies
- 
+
 You’ll need to run these commands to allow your operating system to access the Docker repositories over HTTPS.
- 
+
 In the terminal window, type:
- 
-`sudo apt-get install apt-transport-https ca-certificates curl software-properties-common`
- 
+
+`sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common`
+
 ##### Step 3 Add Docker’s GPG Key
- 
+
 The GPG key is a security feature.
- 
+
 To ensure that the software you’re installing is authentic enter:
- 
+
 `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add –`
- 
+
 ##### Step 4 Install docker repo
- 
+
 To install the Docker repository, enter the command:
- 
+
 `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs) stable"`
- 
-example installation of the docker repository in terminal 
-A stable release is tested and confirmed to work, but updates are released less frequently. You may substitute edge if you’d like more frequent updates, at the cost of potential instability. There are other repositories, but they are riskier – more info can be found on the [https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository](Docker web page).
- 
+
+
 ##### Step 5: Update Repositories
 Update the repositories you just added:
- 
+
 `sudo apt-get update`
- 
+
 ##### Step 6: Install Latest Version of Docker
 To install the latest version of docker:
- 
-`sudo apt-get install docker-ce docker-ce-cli containerd.io`
- 
+
+`sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose`
+
 make sure its the 18.x version. I needed to do 
- 
-`sudo apt-get install docker-ce=18.06.3~ce~3-0~ubuntu`
+
+`sudo apt install docker-ce=18.06.3~ce~3-0~ubuntu`
 
 release notes
- 
+
 [https://docs.docker.com/engine/release-notes/#version-1903](https://docs.docker.com/engine/release-notes/#version-1903)
- 
+
 ##### Step 7 start at boot
- 
+
 The Docker service needs to be setup to run at startup. To do so, type in each command followed by enter:
- 
+
 `sudo systemctl start docker`
 `sudo systemctl enable docker`
 
@@ -108,9 +110,9 @@ Configure sites in `./laradock/nginx/sites/`
 copy `laravel.conf.example` to `yoursite.conf`
 
 ### Caddy
- 
+
 Configure sites in `./caddy/caddy/Caddyfile`
- 
+
 edit as needed.
 
 ## Hosts file
@@ -158,7 +160,7 @@ links:
 ```
 
 with caddy
- 
+
 ```
 depends_on:
   - caddy
@@ -175,38 +177,36 @@ I have created some aliases for my system to make starting, stopping and ssh a l
 
 #### Start
 with ngnix
-`alias lara='cd ~/Code/laradock; docker-compose up -d nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
- 
-with caddy
-`alias lara='cd ~/Code/laradock; docker-compose up -d caddy mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
+`alias lara='cd ~/Code/laradock; docker-compose up -d nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace sqs'`
 
-`alias larabash='cd ~/Code/laradock; docker-compose exec --user=laradock workspace bash'`
+with caddy
+`alias lara='cd ~/Code/laradock; docker-compose up -d caddy mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace sqs'`
+ 
+`alias lara-bash='cd ~/Code/laradock; docker-compose exec --user=laradock workspace bash'`
 
 #### Restart
 
 with ngnix
- `alias lara-restart='cd ~/Code/laradock; docker-compose restart nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
- 
-with caddy
-`alias lara-restart='cd ~/Code/laradock; docker-compose restart caddy mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace'`
+`alias lara-restart='cd ~/Code/laradock; docker-compose restart nginx mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace sqs'`
 
-`alias laraehrestart='cd ~/Work/code/laradock; docker-compose restart elasticsearch laravel-horizon'`
+with caddy
+`alias lara-restart='cd ~/Code/laradock; docker-compose restart caddy mysql adminer redis elasticsearch kibana php-worker laravel-horizon selenium workspace sqs'`
 
 #### Stop
- 
-`alias larastop='cd ~/Code/laradock; docker-compose stop'`
+
+`alias lara-stop='cd ~/Code/laradock; docker-compose stop'`
 
 #### Redis
- 
-`alias lararedis='cd ~/Code/laradock; docker-compose exec redis bash'`
+
+`alias lara-redis='cd ~/Code/laradock; docker-compose exec redis bash'`
 
 #### Mysql
- 
-`alias laramysql='cd ~/Code/laradock; docker-compose exec mysql bash'`
+
+`alias lara-mysql='cd ~/Code/laradock; docker-compose exec mysql bash'`
 
 #### Restart workers
- 
-`alias lara-workers-restart='cd ~/Code/laradock; docker-compose restart php-worker laravel-horizon'`
+
+`alias lara-workers-restart='cd ~/Code/laradock; docker-compose restart php-worker laravel-horizon'; docker-compose exec sqs sh -c "supervisorctl restart elasticmq"`
 
 ## OTHER
 
@@ -228,12 +228,17 @@ Laradock will not change the permissions on restart.
 
 Kibana http://localhost:5601
 Adminer http://localhost:8080/
+SQS http://localhost:9325/
 
 ## Docker commands
 
 Remove all docker containers in order to rebuild by running
 
 `docker-compose down`
+
+then to clean up images
+
+`docker image prune -a`
 
 Then run lara again and all will be rebuilt.
 
@@ -242,3 +247,8 @@ In order to rebuild a container run
 `docker-compose build --no-cache laravel-horizon`
 
 It is best to then restart that container or sometimes do `lara-stop` then `lara` again
+
+
+## Extra
+
+We are running a local SQS tyope service. Repo is here https://hub.docker.com/r/roribio16/alpine-sqs Used for Q

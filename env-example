@@ -153,6 +153,8 @@ WORKSPACE_TIMEZONE=UTC
 WORKSPACE_SSH_PORT=2222
 WORKSPACE_INSTALL_FFMPEG=false
 WORKSPACE_INSTALL_GNU_PARALLEL=false
+WORKSPACE_INSTALL_AST=true
+WORKSPACE_AST_VERSION=1.0.3
 
 ### PHP_FPM ###############################################
 
@@ -242,7 +244,7 @@ NGINX_SSL_PATH=./nginx/ssl/
 ### LARAVEL_HORIZON ################################################
 
 LARAVEL_HORIZON_INSTALL_SOCKETS=false
-LARAVEL_HORIZON_INSTALL_PHPREDIS=false
+LARAVEL_HORIZON_INSTALL_PHPREDIS=true
 LARAVEL_HORIZON_INSTALL_MONGO=false
 
 ### APACHE ################################################

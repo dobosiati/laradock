@@ -4,7 +4,7 @@
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%d %-5p: %c - %m%n"/>
         </Console>
- 
+
         <!-- Internal Graylog log appender. Please do not disable. This makes internal log messages available via REST calls. -->
         <Memory name="graylog-internal-logs" bufferSize="500"/>
     </Appenders>

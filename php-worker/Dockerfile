@@ -10,7 +10,7 @@ FROM php:${PHP_VERSION}-alpine
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
 # If you're in China, or you need to change sources, will be set CHANGE_SOURCE to true in .env.
- 
+
 ARG CHANGE_SOURCE=false
 RUN if [ ${CHANGE_SOURCE} = true ]; then \
     # Change application source from dl-cdn.alpinelinux.org to aliyun source
@@ -131,7 +131,7 @@ RUN if [ ${INSTALL_AMQP} = true ]; then \
 
 # Install Gearman:
 ARG INSTALL_GEARMAN=false
- 
+
 RUN if [ ${INSTALL_GEARMAN} = true ]; then \
     docker-php-ext-install gearman \
 ;fi
@@ -162,7 +162,6 @@ RUN if [ ${INSTALL_GMP} = true ]; then \
    && docker-php-ext-install gmp \
 ;fi
 
-
 # Install Redis package:
 ARG INSTALL_REDIS=false
 RUN if [ ${INSTALL_REDIS} = true ]; then \
@@ -171,7 +170,6 @@ RUN if [ ${INSTALL_REDIS} = true ]; then \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis \
 ;fi
-
 
 ###########################################################################
 # Swoole EXTENSION
@@ -246,7 +244,7 @@ RUN php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
 # Clean up
 RUN rm /var/cache/apk/* \
     && mkdir -p /var/www
- 
+
 WORKDIR /etc/supervisor/conf.d/
 
 EXPOSE 6001

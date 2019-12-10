@@ -35,6 +35,7 @@ q.test:80 {
     rewrite {
         to {path} {path}/ /index.php?{query}
     }
+    redir https://q.test{uri}
 }
 
 q.test:443 {
@@ -57,8 +58,9 @@ screensavers.test:80 {
     rewrite {
         to {path} {path}/ /index.php?{query}
     }
+    redir https://screensavers.test{uri}
 }
- 
+
 screensavers.test:443 {
     root /var/www/screensavers/public
     tls self_signed
@@ -79,8 +81,9 @@ screensavers.test:443 {
     rewrite {
         to {path} {path}/ /index.php?{query}
     }
+    redir https://websockets.test{uri}
 }
- 
+
 websockets.test:443 {
     root /var/www/laravel-websockets/public
     tls self_signed

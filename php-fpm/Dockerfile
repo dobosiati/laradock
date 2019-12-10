@@ -14,7 +14,7 @@
 
 ARG LARADOCK_PHP_VERSION
 
-FROM laradock/php-fpm:2.5-${LARADOCK_PHP_VERSION}
+FROM laradock/php-fpm:2.6.1-${LARADOCK_PHP_VERSION}
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
@@ -266,7 +266,7 @@ ARG INSTALL_XHPROF=false
 RUN if [ ${INSTALL_XHPROF} = true ]; then \
     # Install the php xhprof extension
     if [ $(php -r "echo PHP_MAJOR_VERSION;") = 7 ]; then \
-      curl -L -o /tmp/xhprof.tar.gz "https://github.com/tideways/php-xhprof-extension/archive/v4.1.7.tar.gz"; \
+      curl -L -o /tmp/xhprof.tar.gz "https://github.com/tideways/php-xhprof-extension/archive/v5.0.1.tar.gz"; \
     else \
       curl -L -o /tmp/xhprof.tar.gz "https://codeload.github.com/phacility/xhprof/tar.gz/master"; \
     fi \
@@ -316,9 +316,9 @@ RUN if [ ${INSTALL_AMQP} = true ]; then \
 ###########################################################################
 # GEARMAN:
 ###########################################################################
- 
+
 ARG INSTALL_GEARMAN=false
- 
+
 RUN if [ ${INSTALL_GEARMAN} = true ]; then \
     apt-get update && \
     apt-get -y install libgearman-dev && \
@@ -336,7 +336,7 @@ RUN if [ ${INSTALL_GEARMAN} = true ]; then \
     rm -r /tmp/pecl-gearman && \
     docker-php-ext-enable gearman \
 ;fi
- 
+
 ###########################################################################
 # pcntl
 ###########################################################################
@@ -679,14 +679,15 @@ RUN if [ ${INSTALL_RDKAFKA} = true ]; then \
 ###########################################################################
 # GETTEXT:
 ###########################################################################
- 
+
 ARG INSTALL_GETTEXT=false
- 
+
 RUN if [ ${INSTALL_GETTEXT} = true ]; then \
     apt-get install -y zlib1g-dev libicu-dev g++ libpq-dev libssl-dev gettext && \
     docker-php-ext-install gettext \
 ;fi
- 
+
+###########################################################################
 # Install additional locales:
 ###########################################################################
 
@@ -761,22 +762,22 @@ RUN if [ ${INSTALL_FFMPEG} = true ]; then \
 ###########################################################################
 # Mailparse extension:
 ###########################################################################
- 
+
 ARG INSTALL_MAILPARSE=false
- 
+
 RUN if [ ${INSTALL_MAILPARSE} = true ]; then \
     # Install mailparse extension
     printf "\n" | pecl install -o -f mailparse \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable mailparse \
 ;fi
- 
+
 ###########################################################################
 # CacheTool:
 ###########################################################################
- 
+
 ARG INSTALL_CACHETOOL=false
- 
+
 RUN if [ ${INSTALL_CACHETOOL} = true ]; then \
     if [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && [ $(php -r "echo PHP_MINOR_VERSION;") -ge 1 ]; then \
             curl -sO http://gordalina.github.io/cachetool/downloads/cachetool.phar; \
@@ -786,7 +787,7 @@ RUN if [ ${INSTALL_CACHETOOL} = true ]; then \
     chmod +x cachetool.phar && \
     mv cachetool.phar /usr/local/bin/cachetool \
 ;fi
- 
+
 ###########################################################################
 # Check PHP version:
 ###########################################################################
@@ -814,7 +815,7 @@ ARG PUID=1000
 ENV PUID ${PUID}
 ARG PGID=1000
 ENV PGID ${PGID}
- 
+
 RUN groupmod -o -g ${PGID} www-data && \
     usermod -o -u ${PUID} -g www-data www-data
 

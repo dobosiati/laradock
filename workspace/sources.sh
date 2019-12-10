@@ -1,7 +1,7 @@
 #!/bin/bash
- 
+
 set -xe;
- 
+
 if type "tee" 2>/dev/null && [ -n "${UBUNTU_SOURCE}" ]; then
     SOURCE_PATH="/etc/apt/sources.list"
     cp ${SOURCE_PATH} ${SOURCE_PATH}.bak && rm -rf ${SOURCE_PATH}
