@@ -487,6 +487,21 @@ RUN if [ ${INSTALL_INOTIFY} = true ]; then \
 ;fi
 
 ###########################################################################
+# AST EXTENSION
+###########################################################################
+
+ARG INSTALL_AST=false
+ARG AST_VERSION=1.0.3
+ENV AST_VERSION ${AST_VERSION}
+
+RUN if [ ${INSTALL_AST} = true ]; then \
+    # Install AST extension
+    printf "\n" | pecl -q install ast-${AST_VERSION} && \
+    echo "extension=ast.so" >> /etc/php/${LARADOCK_PHP_VERSION}/mods-available/ast.ini && \
+    phpenmod -v ${LARADOCK_PHP_VERSION} -s cli ast \
+;fi
+
+###########################################################################
 # fswatch
 ###########################################################################
 
@@ -546,7 +561,8 @@ ARG INSTALL_NPM_ANGULAR_CLI=false
 ARG NPM_REGISTRY
 ENV NPM_REGISTRY ${NPM_REGISTRY}
 ENV NVM_DIR /home/laradock/.nvm
-ENV NVM_NODEJS_ORG_MIRROR=${NVM_NODEJS_ORG_MIRROR}
+ARG NVM_NODEJS_ORG_MIRROR
+ENV NVM_NODEJS_ORG_MIRROR ${NVM_NODEJS_ORG_MIRROR}
 
 RUN if [ ${INSTALL_NODE} = true ]; then \
     # Install nvm (A Node Version Manager)
