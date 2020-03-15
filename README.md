@@ -46,7 +46,7 @@ The GPG key is a security feature.
 
 To ensure that the software you’re installing is authentic enter:
 
-`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add –`
+`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`
 
 ##### Step 4 Install docker repo
 
