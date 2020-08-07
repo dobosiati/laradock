@@ -1,29 +1,13 @@
 # Docs: https://caddyserver.com/docs/caddyfile
 0.0.0.0:80 {
-    root /var/www/public
+    root /var/www/q/public
     fastcgi / php-fpm:9000 php {
         index index.php
     }
-
-    # To handle .html extensions with laravel change ext to
-    # ext / .html
-
     rewrite {
         to {path} {path}/ /index.php?{query}
     }
-    gzip
-    browse
-    log /var/log/caddy/access.log
-    errors /var/log/caddy/error.log
-    # Uncomment to enable TLS (HTTPS)
-    # Change the first list to listen on port 443 when enabling TLS
-    #tls self_signed
-
-    # To use Lets encrpt tls with a DNS provider uncomment these
-    # lines and change the provider as required
-    #tls {
-    #  dns cloudflare
-    #}
+    #redir https://q.test{uri}
 }
 
 # Cine Q
@@ -41,6 +25,20 @@ q.test:80 {
 q.test:443 {
     root /var/www/q/public
     tls self_signed
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+}
+
+
+babyinwaiting.test:80 {
+    root /var/www/babyinwaiting/public
+    tls self_signed
+	log /var/www/babyinwaiting/logs/site.log
+	errors /var/www/babyinwaiting/logs/site_errors.log
     fastcgi / php-fpm:9000 php {
         index index.php
     }

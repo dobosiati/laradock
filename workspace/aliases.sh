@@ -70,7 +70,6 @@ alias refresh="php artisan migrate:refresh"
 alias rollback="php artisan migrate:rollback"
 alias seed="php artisan db:seed"
 alias serve="php artisan serve --quiet &"
-alias websockets="cd /var/www/laravel-websockets/; php artisan websockets:serve"
 
 alias phpunit="./vendor/bin/phpunit"
 alias pu="phpunit"
@@ -153,8 +152,10 @@ function fs() {
 
 # Custom Aliases
 alias lang='artisan vue-i18n:generate'
-alias wipelogs='truncate -s 0 storage/logs/*.log'
 alias qmigrate='cd /var/www/q && php artisan migrate:crowdco --fresh'
 alias q='cd /var/www/q'
 alias d='art dusk'
 alias df='art dusk --filter'
+alias artroute="php artisan route:list | grep"
+alias wipelogs='truncate -s 0 storage/logs/*.log'
+alias websockets="cd /var/www/laravel-websockets/; php artisan websockets:serve"
