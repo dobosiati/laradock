@@ -153,6 +153,7 @@ RUN if [ ${INSTALL_CASSANDRA} = true ]; then \
   && make >/dev/null 2>&1 \
   && make install \
   && docker-php-ext-enable cassandra \
+;fi
 
 # Install MongoDB drivers:
 ARG INSTALL_MONGO=false
